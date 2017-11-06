@@ -1,0 +1,12 @@
+1.  A C standard library that lets you specify exact width integers.
+2.  portability of code, strictly defining what each int is prevents errors in conversion if another machine has another definition
+3.  1, 4, 4, and 2
+4.  424d
+5.  bfSize is the size of the entire bitmap image while biSize is the size of the bitmapinfoheader structure (40 bytes)
+6.  it indicates a top-down DIB in other words the top row of the image is the first row in memory and moves down.
+7.  biBitCount
+8.  Perhaps the file doesn't exist or we have insufficient system permisions to access it, basically an error happing trying to open.
+9.  because we only want to read on element at a time, whether the header files or the triple structures
+10. 3
+11. Skip over any padding
+12. It moves file pointer position to given location.
