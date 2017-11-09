@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdint.h>
 
-#include "bmp.h"
+typedef uint8_t  BYTE;
 
 bool isNewJpeg(BYTE byte[512]);
 //bool isQualFourth(char *byte);
@@ -79,6 +80,7 @@ int main(int argc, char *argv[])
         // if fread doesn't find a block terminate loop
         if (n < 1)
         {
+            return 0;
             break;
         }
     }
