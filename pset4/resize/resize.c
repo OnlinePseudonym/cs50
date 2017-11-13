@@ -17,24 +17,24 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // ensure between 1 & 100
-    if ((argv[1] < 1) || (argv[1] > 101))
-    {
-        fprintf(stderr, "Multiplier must be between 1 and 100");
-        return 1;
-    }
-
     // define argurments
     int multiplier = atoi(argv[1]);
     char *infile = argv[2];
     char *outfile = argv[3];
+
+    // ensure between 1 & 100
+    if ((multiplier < 1) || (multiplier > 101))
+    {
+        fprintf(stderr, "Multiplier must be between 1 and 100");
+        return 2;
+    }
 
     // open input file
     FILE *inptr = fopen(infile, "r");
     if (inptr == NULL)
     {
         fprintf(stderr, "Could not open %s.\n", infile);
-        return 2;
+        return 3;
     }
 
     // open output file
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
     {
         fclose(inptr);
         fprintf(stderr, "Could not create %s.\n", outfile);
-        return 3;
+        return 4;
     }
 
     // read infile's BITMAPFILEHEADER
@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
         fclose(outptr);
         fclose(inptr);
         fprintf(stderr, "Unsupported file format.\n");
-        return 4;
+        return 5;
     }
 
     // initialize header copies to edit
