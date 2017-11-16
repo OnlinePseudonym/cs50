@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+import os
+import sys
+import helpers
+
+from termcolor import colored
+from analyzer import Analyzer
+from nltk.tokenize import TweetTokenizer
+
+
+def main():
+    if len(sys.argv) is not 2:
+        print("proper usage: ./tweets <argument>")
+        sys.exit(1)
+
+    try:
+        tweets = helpers.get_user_timeline(sys.argv[1], 50)
+    except RuntimeError as e:
+        print(e)
+        sys.exit(2)
+    if tweets == None:
+        print("Requested tweets not found")
+        sys.exit(3)
+
+    positives = os.path.join(sys.path[0], "positive-words.txt")
+    negatives = os.path.join(sys.path[0], "negative-words.txt")
+
+    analyzer = Analyzer(positives, negatives)
+
+    for tweet in tweets:
+        score = analyzer.analyze(tweet)
+        print(score)
+        if score > 0.0:
+            print(colored(tweet, "green"))
+        elif score < 0.0:
+            print(colored(tweet, "red"))
+        else:
+            print(colored(tweet, "yellow"))
+
+if __name__ == "__main__":
+    main()
