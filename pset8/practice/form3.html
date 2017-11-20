@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link href="https://maxcd.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/jx/bootstrap.min.js"></script>
+
+        <!-- http://1000hx.github.io/bootstrap-validator/ -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator"></script>
+
+        <title>form3</title>
+    </head>
+    <body>
+        <div class="container">
+            <form action="/register" data-toggle="validator" id="registration" method="get">
+                <div class="form-group">
+                    <label for="email" class="control-label">Email</label>
+                    <input class="form-control" id="email" required type="text"/>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="control-label">Password</label>
+                    <input class="form-control" data-minlength="8" id="password" required type="text"/>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmation" class="control-label">Password (again)</label>
+                    <input class="form-control" data-match="#password" data-match-error="passwords don't match" required type="text"/>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input data-error="checkbox unchecked" id="agreement" required type="checkbox"/>
+                        </label>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-default" type="submit">Register</button>
+                </div>
+            </form>
+        </div>
+
+
+
+        <form id="registration" action="/register" method="get">
+            <input name="email" placeholder="Email" type="text"/>
+            <input name="password" placeholder="Password" type="password"/>
+            <input name="confirmation" placeholder="Password (again)" type="password"/>
+            <input name="agreement" type="checkbox"/> I agree
+            <input type="submit" value="Register"/>
+        </form>
+        <script>
+
+            var form = document.getElementById('registration');
+            form.onsubmit = function() {
+
+                if (form.email.value == '')
+                {
+                    alert('missing email');
+                    return false;
+                }
+                else if (form.password.value == '')
+                {
+                    alert('missing password');
+                    return false;
+                }
+                else if (form.password.value != form.confirmation.value)
+                {
+                    alert('passwords don\'t match');
+                    return false;
+                }
+                else if (!form.agreement.checked)
+                {
+                    alert('checkbox unchecked');
+                    return false;
+                }
+                return true;
+            };
+
+        </script>
+    </body>
+</html>
